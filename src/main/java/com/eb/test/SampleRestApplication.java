@@ -21,11 +21,15 @@ import java.security.PrivateKey;
 import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.cxf.Bus;
 import org.apache.cxf.common.classloader.ClassLoaderUtils;
 import org.apache.cxf.endpoint.Server;
+import org.apache.cxf.feature.LoggingFeature;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.swagger.Swagger2Feature;
 import org.apache.cxf.rs.security.httpsignature.MessageSigner;
@@ -86,6 +90,16 @@ public class SampleRestApplication {
         providers.add(new CreateSignatureInterceptor());
         providers.add(new VerifySignatureClientFilter());
 
+        LoggingInInterceptor loggingInInterceptor = new LoggingInInterceptor();
+        LoggingOutInterceptor loggingOutInterceptor = new LoggingOutInterceptor();
+
+        endpoint.setInFaultInterceptors(Collections.singletonList(loggingInInterceptor));
+        endpoint.setInInterceptors(Collections.singletonList(loggingInInterceptor));
+
+        endpoint.setOutFaultInterceptors(Collections.singletonList(loggingOutInterceptor));
+        endpoint.setInInterceptors(Collections.singletonList(loggingOutInterceptor));
+
+        bus.setFeatures(Collections.singleton(new LoggingFeature()));
         endpoint.setProvider(verifySignatureFilter);
         endpoint.setBus(bus);
         endpoint.setServiceBeans(Arrays.<Object>asList(new HelloServiceImpl()));
