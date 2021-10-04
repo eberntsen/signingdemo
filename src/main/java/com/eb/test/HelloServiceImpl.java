@@ -38,4 +38,9 @@ public class HelloServiceImpl implements HelloService {
                 "  \\__ \\ / / / / / / /_  / /_    \n" +
                 " ___/ // / / /_/ / __/ / __/    \n" +
                 "/____//_/  \\____/_/   /_/       ";   }
+
+    @Override
+    public String stuff(String body) {
+        return body + " successfully saved";
+    }
 }
