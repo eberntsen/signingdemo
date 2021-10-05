@@ -101,6 +101,7 @@ public class SampleRestApplication {
 
         bus.setFeatures(Collections.singleton(new LoggingFeature()));
         endpoint.setProvider(verifySignatureFilter);
+        endpoint.setProvider(signatureFilter);
         endpoint.setBus(bus);
         endpoint.setServiceBeans(Arrays.<Object>asList(new HelloServiceImpl()));
         endpoint.setAddress("/");
