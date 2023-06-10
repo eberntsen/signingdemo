@@ -19,7 +19,7 @@
         <camel.version>2.21.2</camel.version>
         <fabric8.version>2.3.7</fabric8.version>
         <spring-boot.version>2.1.6.RELEASE</spring-boot.version>
-        <swagger-ui.version>2.1.0</swagger-ui.version>
+        <swagger-ui.version>2.2.10-1</swagger-ui.version>
 
         <!-- maven plugin versions -->
         <fabric8.maven.plugin.version>3.5.40</fabric8.maven.plugin.version>
